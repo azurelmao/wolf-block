@@ -1,0 +1,18 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "turniplabs.wolfblock.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "BlockModelRenderBlocksAccessor",
+        "EntityWolfMixin",
+        "RenderBlocksAccessor",
+        "RenderBlocksMixin",
+        "RenderGlobalMixin"
+    ],
+    "client": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
+  }
+}
