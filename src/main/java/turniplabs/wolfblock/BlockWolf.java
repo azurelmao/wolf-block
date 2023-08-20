@@ -67,7 +67,7 @@ public class BlockWolf extends BlockTileEntityRotatable {
         int powered = (world.isBlockGettingPowered(x, y, z) || world.isBlockIndirectlyGettingPowered(x, y, z)) ? 1 : 0;
 
         meta = orientation | (powered << 3);
-        world.setBlockMetadataWithNotify(x, y, z,  meta);
+        world.setBlockMetadataWithNotify(x, y, z, meta);
     }
 
     @Override

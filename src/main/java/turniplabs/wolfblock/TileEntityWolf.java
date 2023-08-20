@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Random;
 
 public class TileEntityWolf extends TileEntity {
-    private int attackTime = 0;
     private final Random rand = new Random();
+    private int attackTime = 0;
 
     public String getInvName() {
         return "WolfBlock";

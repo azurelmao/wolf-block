@@ -14,7 +14,8 @@ import turniplabs.wolfblock.WolfBlock;
 @Mixin(value = RenderGlobal.class, remap = false)
 public abstract class RenderGlobalMixin {
 
-    @Shadow public abstract void playSound(String soundPath, SoundType type, double x, double y, double z, float volume, float pitch);
+    @Shadow
+    public abstract void playSound(String soundPath, SoundType type, double x, double y, double z, float volume, float pitch);
 
     @Inject(
             method = "playBlockSoundEffect",

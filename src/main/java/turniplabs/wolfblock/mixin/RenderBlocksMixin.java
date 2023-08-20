@@ -6,8 +6,6 @@ import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.client.render.TextureFX;
 import net.minecraft.core.Global;
 import net.minecraft.core.block.Block;
-import net.minecraft.core.util.helper.Side;
-import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,16 +18,18 @@ import turniplabs.wolfblock.WolfBlock;
 public abstract class RenderBlocksMixin implements RenderBlocksWolf {
     @Shadow
     private Minecraft mc;
+    @Shadow
+    private int uvRotateTop;
+    @Shadow
+    private World world;
+    @Shadow
+    private int uvRotateBottom;
 
-    @Shadow public abstract boolean renderStandardBlockWithAmbientOcclusion(Block block, int x, int y, int z, float x1, float y1, float z1);
+    @Shadow
+    public abstract boolean renderStandardBlockWithAmbientOcclusion(Block block, int x, int y, int z, float x1, float y1, float z1);
 
-    @Shadow public abstract boolean renderStandardBlockWithColorMultiplier(Block block, int x, int y, int z, float r, float g, float b);
-
-    @Shadow private int uvRotateTop;
-
-    @Shadow private World world;
-
-    @Shadow private int uvRotateBottom;
+    @Shadow
+    public abstract boolean renderStandardBlockWithColorMultiplier(Block block, int x, int y, int z, float r, float g, float b);
 
     @Override
     public boolean wolfblock$renderWolfBlock(Block block, int x, int y, int z) {
@@ -39,10 +39,22 @@ public abstract class RenderBlocksMixin implements RenderBlocksWolf {
         int rotateTop;
         int rotateBottom;
         switch (orientation) {
-            case 2: rotateTop = 3; rotateBottom = 3; break;
-            case 3: rotateTop = 4; rotateBottom = 4; break;
-            case 4: rotateTop = 1; rotateBottom = 2; break;
-            default: rotateTop = 2; rotateBottom = 1; break;
+            case 2:
+                rotateTop = 3;
+                rotateBottom = 3;
+                break;
+            case 3:
+                rotateTop = 4;
+                rotateBottom = 4;
+                break;
+            case 4:
+                rotateTop = 1;
+                rotateBottom = 2;
+                break;
+            default:
+                rotateTop = 2;
+                rotateBottom = 1;
+                break;
         }
         uvRotateTop = rotateTop;
         uvRotateBottom = rotateBottom;
@@ -61,7 +73,7 @@ public abstract class RenderBlocksMixin implements RenderBlocksWolf {
     )
     private double northD4(double original, @Local(ordinal = 0) Block block, @Local(ordinal = 0) int textureIndex) {
         if (block.id == WolfBlock.wolfBlock.id && textureIndex == Block.texCoordToIndex(0, 27) || textureIndex == Block.texCoordToIndex(0, 29)) {
-            double unit = TextureFX.tileWidthTerrain / (double)(TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
+            double unit = TextureFX.tileWidthTerrain / (double) (TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
             original = original + unit;
             return original;
         }
@@ -75,7 +87,7 @@ public abstract class RenderBlocksMixin implements RenderBlocksWolf {
     )
     private double northD6(double original, @Local(ordinal = 0) Block block, @Local(ordinal = 0) int textureIndex) {
         if (block.id == WolfBlock.wolfBlock.id && textureIndex == Block.texCoordToIndex(0, 27) || textureIndex == Block.texCoordToIndex(0, 29)) {
-            double unit = TextureFX.tileWidthTerrain / (double)(TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
+            double unit = TextureFX.tileWidthTerrain / (double) (TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
             original = original + unit;
             return original;
         }
@@ -89,7 +101,7 @@ public abstract class RenderBlocksMixin implements RenderBlocksWolf {
     )
     private double southD4(double original, @Local(ordinal = 0) Block block, @Local(ordinal = 0) int textureIndex) {
         if (block.id == WolfBlock.wolfBlock.id && textureIndex == Block.texCoordToIndex(0, 27) || textureIndex == Block.texCoordToIndex(0, 29)) {
-            double unit = TextureFX.tileWidthTerrain / (double)(TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
+            double unit = TextureFX.tileWidthTerrain / (double) (TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
             original = original + unit;
             return original;
         }
@@ -103,7 +115,7 @@ public abstract class RenderBlocksMixin implements RenderBlocksWolf {
     )
     private double southD6(double original, @Local(ordinal = 0) Block block, @Local(ordinal = 0) int textureIndex) {
         if (block.id == WolfBlock.wolfBlock.id && textureIndex == Block.texCoordToIndex(0, 27) || textureIndex == Block.texCoordToIndex(0, 29)) {
-            double unit = TextureFX.tileWidthTerrain / (double)(TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
+            double unit = TextureFX.tileWidthTerrain / (double) (TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
             original = original + unit;
             return original;
         }
@@ -117,7 +129,7 @@ public abstract class RenderBlocksMixin implements RenderBlocksWolf {
     )
     private double eastD4(double original, @Local(ordinal = 0) Block block, @Local(ordinal = 0) int textureIndex) {
         if (block.id == WolfBlock.wolfBlock.id && textureIndex == Block.texCoordToIndex(0, 27) || textureIndex == Block.texCoordToIndex(0, 29)) {
-            double unit = TextureFX.tileWidthTerrain / (double)(TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
+            double unit = TextureFX.tileWidthTerrain / (double) (TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
             original = original + unit;
             return original;
         }
@@ -131,7 +143,7 @@ public abstract class RenderBlocksMixin implements RenderBlocksWolf {
     )
     private double eastD6(double original, @Local(ordinal = 0) Block block, @Local(ordinal = 0) int textureIndex) {
         if (block.id == WolfBlock.wolfBlock.id && textureIndex == Block.texCoordToIndex(0, 27) || textureIndex == Block.texCoordToIndex(0, 29)) {
-            double unit = TextureFX.tileWidthTerrain / (double)(TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
+            double unit = TextureFX.tileWidthTerrain / (double) (TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
             original = original + unit;
             return original;
         }
@@ -145,7 +157,7 @@ public abstract class RenderBlocksMixin implements RenderBlocksWolf {
     )
     private double westD4(double original, @Local(ordinal = 0) Block block, @Local(ordinal = 0) int textureIndex) {
         if (block.id == WolfBlock.wolfBlock.id && textureIndex == Block.texCoordToIndex(0, 27) || textureIndex == Block.texCoordToIndex(0, 29)) {
-            double unit = TextureFX.tileWidthTerrain / (double)(TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
+            double unit = TextureFX.tileWidthTerrain / (double) (TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
             original = original + unit;
             return original;
         }
@@ -159,7 +171,7 @@ public abstract class RenderBlocksMixin implements RenderBlocksWolf {
     )
     private double westD6(double original, @Local(ordinal = 0) Block block, @Local(ordinal = 0) int textureIndex) {
         if (block.id == WolfBlock.wolfBlock.id && textureIndex == Block.texCoordToIndex(0, 27) || textureIndex == Block.texCoordToIndex(0, 29)) {
-            double unit = TextureFX.tileWidthTerrain / (double)(TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
+            double unit = TextureFX.tileWidthTerrain / (double) (TextureFX.tileWidthTerrain * Global.TEXTURE_ATLAS_WIDTH_TILES);
             original = original + unit;
             return original;
         }
