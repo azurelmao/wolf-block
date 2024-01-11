@@ -1,10 +1,10 @@
-package turniplabs.wolfblock;
+package azurelmao.wolfblock;
 
+import azurelmao.wolfblock.mixin.BlockModelRenderBlocksAccessor;
+import azurelmao.wolfblock.mixin.RenderBlocksAccessor;
 import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
 import net.minecraft.core.block.Block;
-import turniplabs.wolfblock.mixin.BlockModelRenderBlocksAccessor;
-import turniplabs.wolfblock.mixin.RenderBlocksAccessor;
 
 public class BlockModelWolf extends BlockModelRenderBlocks {
     public BlockModelWolf() {

@@ -1,4 +1,4 @@
-package turniplabs.wolfblock;
+package azurelmao.wolfblock;
 
 import net.minecraft.core.block.Block;
 

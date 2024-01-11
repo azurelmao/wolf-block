@@ -1,4 +1,4 @@
-package turniplabs.wolfblock.mixin;
+package azurelmao.wolfblock.mixin;
 
 import net.minecraft.client.render.RenderGlobal;
 import net.minecraft.core.block.Block;
@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import turniplabs.wolfblock.WolfBlock;
+import azurelmao.wolfblock.WolfBlock;
 
 @Mixin(value = RenderGlobal.class, remap = false)
 public abstract class RenderGlobalMixin {

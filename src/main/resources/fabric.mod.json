@@ -6,7 +6,7 @@
   "name": "Wolf Block",
   "description": "Adds the wolf block to the game.",
   "authors": [
-    "Turnip Labs"
+    "azurelmao"
   ],
   "contact": {
     "homepage": "",
@@ -18,7 +18,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-        "turniplabs.wolfblock.WolfBlock"
+        "azurelmao.wolfblock.WolfBlock"
     ]
   },
   "mixins": [

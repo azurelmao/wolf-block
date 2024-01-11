@@ -1,9 +1,12 @@
-package turniplabs.wolfblock.mixin;
+package azurelmao.wolfblock.mixin;
 
+import azurelmao.wolfblock.WolfBlock;
+import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.Block;
-import net.minecraft.core.block.entity.TileEntityPiston;
 import net.minecraft.core.block.logic.PistonDirections;
+import net.minecraft.core.block.piston.TileEntityPistonMoving;
 import net.minecraft.core.entity.animal.EntityWolf;
+import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,7 +15,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import turniplabs.wolfblock.WolfBlock;
 
 import java.util.Random;
 
@@ -30,6 +32,8 @@ public abstract class EntityWolfMixin {
     @Shadow
     protected abstract void dropFewItems();
 
+    @Shadow public abstract String getWolfOwner();
+
     @Inject(method = "onLivingUpdate", at = @At("HEAD"))
     private void onLivingUpdate(CallbackInfo ci) {
         EntityWolf wolf = (EntityWolf) (Object) this;
@@ -46,22 +50,31 @@ public abstract class EntityWolfMixin {
             return;
         }
 
-        TileEntityPiston tileEntity = (TileEntityPiston) world.getBlockTileEntity(x, y, z);
-        int facing = tileEntity.func_31009_d();
+        TileEntityPistonMoving tileEntity = (TileEntityPistonMoving) world.getBlockTileEntity(x, y, z);
+        int direction = tileEntity.getDirection();
 
-        int facingId = world.getBlockId(
-                x + PistonDirections.xOffset[facing],
-                y + PistonDirections.yOffset[facing],
-                z + PistonDirections.zOffset[facing]);
+        int blockIdInDirection = world.getBlockId(
+                x + PistonDirections.xOffset[direction],
+                y + PistonDirections.yOffset[direction],
+                z + PistonDirections.zOffset[direction]);
 
-        if (facingId == Block.obsidian.id) {
+        if (blockIdInDirection == Block.obsidian.id) {
+            ItemStack itemStack = new ItemStack(WolfBlock.wolfBlock.asItem(), 1);
+            CompoundTag data = new CompoundTag();
+            if (getWolfOwner() != null) {
+                data.putString("Owner", getWolfOwner());
+            }
+
+            itemStack.setData(data);
+            wolf.spawnAtLocation(itemStack, 0f);
+
             Random random = new Random();
             spawnConversionParticle(world, random, wolf);
-            wolf.spawnAtLocation(WolfBlock.wolfBlock.asItem().id, 1);
+
             world.playSoundAtEntity(wolf, getDeathSound(), getSoundVolume(), (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
             dropFewItems();
-            crushed = true;
 
+            crushed = true;
             wolf.remove();
         }
     }

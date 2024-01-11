@@ -1,4 +1,4 @@
-package turniplabs.wolfblock.mixin;
+package azurelmao.wolfblock.mixin;
 
 import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
